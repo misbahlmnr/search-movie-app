@@ -4,7 +4,7 @@ import Body from "../layout/Body";
 import Footer from "../layout/Footer";
 import Header from "../layout/Header";
 import { getGenreData } from "../services/api/actions";
-import { StoreContext, StoreProvider } from "../services/context";
+import { StoreContext } from "../services/context";
 import { Loading } from "./loading";
 
 const AppContainer = () => {
@@ -26,14 +26,12 @@ const AppContainer = () => {
   return (
     <Router>
       <div className="pb-[64px] font-manrope tracking-wide">
-        <StoreProvider>
-          {/* header */}
-          <Header />
-          {/* body */}
-          <Body />
-          {/* footer */}
-          <Footer />
-        </StoreProvider>
+        {/* header */}
+        <Header />
+        {/* body */}
+        <Body />
+        {/* footer */}
+        <Footer />
       </div>
     </Router>
   );

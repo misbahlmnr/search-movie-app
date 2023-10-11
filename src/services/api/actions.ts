@@ -79,11 +79,9 @@ const getGenreData = async (dispatch: Dispatch<any>) => {
     const movie = await getGenre("movie");
     const tv = await getGenre("tv");
 
-    const data = { tv, movie };
-
     dispatch({
       type: "FETCH_GENRES_DATA",
-      data,
+      data: { tv, movie },
     });
   } catch (err) {
     console.error(err);

@@ -61,7 +61,13 @@ const Home = () => {
 
       {/* In theater */}
       <Section title="In Theaters" className="py-0">
-        <Slider isMovieCard autoplay slidesToShow={5} slidesToScroll={5}>
+        <Slider
+          isMovieCard
+          autoplay
+          slidesToShow={5}
+          slidesToScroll={5}
+          className="custom-slider"
+        >
           {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             (_) =>
@@ -79,7 +85,13 @@ const Home = () => {
 
       {/* populers */}
       <Section title="What's Popular" className="py-0">
-        <Slider isMovieCard autoplay slidesToShow={5} slidesToScroll={5}>
+        <Slider
+          isMovieCard
+          autoplay
+          slidesToShow={5}
+          slidesToScroll={5}
+          className="custom-slider"
+        >
           {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             (_) =>
@@ -101,7 +113,13 @@ const Home = () => {
         className="py-0"
         onTitleClick={() => navigate(`/list/top-rated-tv`)}
       >
-        <Slider isMovieCard autoplay slidesToShow={5} slidesToScroll={5}>
+        <Slider
+          isMovieCard
+          autoplay
+          slidesToShow={5}
+          slidesToScroll={5}
+          className="custom-slider"
+        >
           {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             (_) =>
@@ -123,7 +141,13 @@ const Home = () => {
         className="py-0"
         onTitleClick={() => navigate(`/list/top-rated-movie`)}
       >
-        <Slider isMovieCard autoplay slidesToShow={5} slidesToScroll={5}>
+        <Slider
+          isMovieCard
+          autoplay
+          slidesToShow={5}
+          slidesToScroll={5}
+          className="custom-slider"
+        >
           {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             (_) =>

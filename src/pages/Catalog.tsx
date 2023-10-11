@@ -23,12 +23,12 @@ const Catalog = (props: Props) => {
   const page = useRef(1);
   const totalPage = useRef(0);
   const loadingRef = useRef(false);
-  const [onLoading, setOnLoading] = useState(false);
   const location = useLocation();
   const [film, setFilm] = useState<Film[]>([]);
   const { listTitle } = useParams();
 
   let title = "";
+  // eslint-disable-next-line no-unused-vars
   let request: (page: number) => Promise<{
     totalPages: number;
     totalResult?: number;
@@ -66,10 +66,8 @@ const Catalog = (props: Props) => {
 
   const fetch = async () => {
     loadingRef.current = true;
-    setOnLoading(true);
     const { films, totalPages } = await request(page.current);
 
-    setOnLoading(false);
     loadingRef.current = false;
     totalPage.current = totalPages;
     setFilm((arrs) => [...arrs, ...films]);

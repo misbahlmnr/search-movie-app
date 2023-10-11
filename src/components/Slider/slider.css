@@ -26,3 +26,15 @@
 .slick-hero .slick-next {
   right: 25px;
 }
+
+.custom-slider.slick-slider {
+  max-height: 320px;
+  height: 320px;
+}
+
+@media screen and (max-width: 768px) {
+  .custom-slider.slick-slider {
+    max-height: 300px;
+    height: 300px;
+  }
+}

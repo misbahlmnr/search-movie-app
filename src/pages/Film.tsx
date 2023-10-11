@@ -147,7 +147,13 @@ const Film = (props: Props) => {
       {/* recomendations */}
       {recomendations.length > 0 && (
         <Section title="Recomendation" className="py-0">
-          <Slider isMovieCard autoplay slidesToShow={5} slidesToScroll={5}>
+          <Slider
+            isMovieCard
+            autoplay
+            slidesToShow={5}
+            slidesToScroll={5}
+            className="custom-slider"
+          >
             {
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
               (_) =>

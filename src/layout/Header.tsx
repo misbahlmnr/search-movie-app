@@ -133,7 +133,6 @@ const Header = () => {
             onClick={(e) => {
               e.stopPropagation();
               setIsSearchFocuss(true);
-              console.log("ter-click");
             }}
           />
           <IoIosSearch size={18} />
