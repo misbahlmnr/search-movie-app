@@ -4,12 +4,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        manrope: ["Manrope"],
+        manrope: ["Raleway"],
       },
       colors: {
-        primary: "#423F71",
-        header: "#292841",
-        body: "#1C1B29",
+        primary: "#292929",
+        header: "#1C1C1C",
+        body: "#0F0F0F",
       },
       screens: {
         mobile: {

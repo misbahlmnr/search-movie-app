@@ -103,12 +103,9 @@ const Catalog = (props: Props) => {
         <div className="w-full h-full bg-primary" />
       </div>
 
-      <Section
-        title={title}
-        className="flex items-center relative z-10"
-      ></Section>
+      <Section title={title} className="flex items-center relative z-10" />
       <Section>
-        <div className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 mobile:grid-cols-2">
+        <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 mobile:grid-cols-2">
           {film.map((film, idx) => (
             <div key={idx}>
               <Card

@@ -9,6 +9,7 @@ import {
 import Container from "../components/Container";
 import SearchResult from "../components/search-result";
 import { cva, mergeClassName } from "../utils";
+import Logo from "../assets/logo.png";
 
 const MENU_CLASS = cva("px-6", "py-1.5", "rounded-md", "hover:bg-primary");
 
@@ -82,9 +83,11 @@ const Header = () => {
             isSearchFocuss ? "mobile:hidden" : ""
           )}
         >
-          <h1 className="text-2xl">
-            <Link to={"/"}>Movies</Link>
-          </h1>
+          <div className="mt-1">
+            <Link to={"/"}>
+              <img src={Logo} alt="Search Movie" className="w-[200px]" />
+            </Link>
+          </div>
           <div
             className={cva(
               "flex",
@@ -109,11 +112,16 @@ const Header = () => {
         </div>
         <div
           className={cva(
+            "mt-2",
+            "bg-white",
+            "h-[40px]",
+            "rounded-full",
             "border-b-[1.5px]",
             "border-white",
             "flex",
             "items-center",
-            "p-1",
+            "justify-center",
+            "p-2",
             "flex-[0.5]",
             "focus-within:border-primary",
             "relative",
@@ -127,7 +135,7 @@ const Header = () => {
             value={keyword}
             placeholder="Search..."
             autoComplete="off"
-            className="bg-transparent outline-0 flex-1"
+            className="bg-transparent outline-0 flex-1 text-slate-700"
             onInput={(e) => setKeyword(e.currentTarget.value)}
             onKeyDown={(e) => (e.key === "Enter" ? goToSearchPage() : "")}
             onClick={(e) => {
@@ -135,7 +143,7 @@ const Header = () => {
               setIsSearchFocuss(true);
             }}
           />
-          <IoIosSearch size={18} />
+          <IoIosSearch size={18} fill={"black"} />
 
           {/* result */}
           {isSearchFocuss && keyword && (

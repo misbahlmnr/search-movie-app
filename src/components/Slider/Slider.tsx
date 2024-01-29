@@ -19,8 +19,8 @@ const Slider = (props: Props) => {
     settings = {
       ...settings,
       autoplay: false,
-      infinite: true,
-      slidesToShow: 5,
+      infinite: false,
+      slidesToShow: 6,
       slidesToScroll: 1,
       swipe: false,
       responsive: [
