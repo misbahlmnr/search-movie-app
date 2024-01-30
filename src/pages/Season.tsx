@@ -38,7 +38,7 @@ const Season = () => {
       <div className="h-[150px] top-0 left-0 right-0 bottom-0 relative">
         <div className="overlay-film-cover" />
         <Images
-          src={tmdbImageSrc(season.posterPath)}
+          src={tmdbImageSrc(season.posterPath, true)}
           className="w-full h-full"
         />
       </div>

@@ -19,8 +19,8 @@ const TrendingHero = (props: Props) => {
       <div className="absolute left-0 top-0 right-0 bottom-0">
         <div className="overlay-slick-hero" />
         <Images
-          src={tmdbImageSrc(props.film.coverPath)}
-          className="w-full h-full"
+          src={tmdbImageSrc(props.film.coverPath, true)}
+          className="w-full h-full object-center"
         />
         <div className="overlay-film-cover" />
       </div>

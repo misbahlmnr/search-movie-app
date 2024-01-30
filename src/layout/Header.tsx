@@ -113,11 +113,9 @@ const Header = () => {
         <div
           className={cva(
             "mt-2",
-            "bg-white",
+            "bg-primary",
             "h-[40px]",
-            "rounded-full",
-            "border-b-[1.5px]",
-            "border-white",
+            "rounded-lg",
             "flex",
             "items-center",
             "justify-center",
@@ -135,7 +133,7 @@ const Header = () => {
             value={keyword}
             placeholder="Search..."
             autoComplete="off"
-            className="bg-transparent outline-0 flex-1 text-slate-700"
+            className="bg-transparent outline-0 flex-1"
             onInput={(e) => setKeyword(e.currentTarget.value)}
             onKeyDown={(e) => (e.key === "Enter" ? goToSearchPage() : "")}
             onClick={(e) => {
@@ -143,7 +141,7 @@ const Header = () => {
               setIsSearchFocuss(true);
             }}
           />
-          <IoIosSearch size={18} fill={"black"} />
+          <IoIosSearch size={18} />
 
           {/* result */}
           {isSearchFocuss && keyword && (

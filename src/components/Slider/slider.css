@@ -20,11 +20,25 @@
 }
 
 .slick-hero .slick-prev {
-  left: 25px;
+  display: none !important;
 }
 
 .slick-hero .slick-next {
-  right: 25px;
+  display: none !important;
+}
+
+.slick-slider .slick-prev {
+  left: -30px;
+}
+
+.slick-slider .slick-prev::before {
+  z-index: 10;
+  font-size: 50px;
+}
+
+.slick-slider .slick-next::before {
+  z-index: 10;
+  font-size: 50px;
 }
 
 .custom-slider.slick-slider {

@@ -52,7 +52,7 @@ const Film = (props: Props) => {
       <div className="h-[300px] top-0 left-0 right-0 bottom-0 relative">
         <div className="overlay-film-cover" />
         <Images
-          src={tmdbImageSrc(detail.coverPath)}
+          src={tmdbImageSrc(detail.coverPath, true)}
           className="w-full h-full"
         />
       </div>
@@ -70,7 +70,7 @@ const Film = (props: Props) => {
             {detail.genreIds.map((id, idx) => (
               <li
                 key={idx}
-                className="px-3 py-1.5 bg-primary rounded-lg text-sm"
+                className="px-3 py-1.5 bg-red-800 rounded-lg text-sm"
               >
                 {genres[detail.mediaType].find((g) => g.id === id)?.name}
               </li>

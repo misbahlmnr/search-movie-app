@@ -40,10 +40,11 @@ export const isFilm = (film: any): film is Film => {
   return <Film>film !== undefined;
 };
 
-export const tmdbImageSrc = (path: string) => {
+export const tmdbImageSrc = (path: string, isHd = false) => {
   const baseImageURI = import.meta.env.VITE_REACT_APP_TMDB_API_IMAGE_URL;
+  const quality = isHd ? "original" : "w500";
   if (path) {
-    return baseImageURI + path;
+    return baseImageURI + quality + path;
   }
   return baseImageURI;
 };
