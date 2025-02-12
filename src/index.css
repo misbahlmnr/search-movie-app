@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 body,
 html {
@@ -9,8 +7,8 @@ html {
 }
 
 body {
-  background-color: theme("colors.body");
-  color: theme("colors.white");
+  background-color: #0f0f0f;
+  color: #fff;
 }
 
 .overlay-slick-hero {
@@ -19,12 +17,7 @@ body {
   bottom: 0;
   right: 0;
   left: 0;
-  background: linear-gradient(
-    to right,
-    theme("colors.body") 30%,
-    transparent 90%,
-    theme("colors.body")
-  );
+  background: linear-gradient(to right, #0f0f0f 30%, transparent 90%, #0f0f0f);
 }
 
 .overlay-film-cover {
@@ -33,5 +26,5 @@ body {
   bottom: 0;
   right: 0;
   left: 0;
-  background: linear-gradient(to bottom, transparent 10%, theme("colors.body"));
+  background: linear-gradient(to bottom, transparent 10%, #0f0f0f);
 }
