@@ -1,16 +1,16 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import Card from "../components/Card";
-import Section from "../components/Section";
-import Slider from "../components/Slider/Slider";
-import TrailerModal from "../components/Trailer-modal";
-import TrendingHero from "../components/Trending-hero";
-import { Film } from "../interfaces";
-import { getHomeData } from "../services/api/actions";
-import { getTrailers } from "../services/api/api";
-import { StoreContext } from "../services/context";
-import { MediaType } from "../types";
-import { tmdbImageSrc } from "../utils";
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import Card from '../components/Card';
+import Section from '../components/Section';
+import Slider from '../components/Slider/Slider';
+import TrailerModal from '../components/TrailerModal';
+import TrendingHero from '../components/TrendingHero';
+import { Film } from '../interfaces';
+import { getHomeData } from '../services/api/actions';
+import { getTrailers } from '../services/api/api';
+import { StoreContext } from '../services/context';
+import { MediaType } from '../types';
+import { tmdbImageSrc } from '../utils';
 
 const Home = () => {
   const { state, dispatch } = useContext(StoreContext);
@@ -35,7 +35,7 @@ const Home = () => {
 
   return (
     <>
-      <TrailerModal onHide={() => setTrailerSrc("")} src={trailerSrc} />
+      <TrailerModal onHide={() => setTrailerSrc('')} src={trailerSrc} />
       {/* Trending */}
       <Section className="py-0">
         <Slider
@@ -51,7 +51,7 @@ const Home = () => {
                 film={film}
                 onPlayTrailer={() => playTrailer(film)}
                 onClick={() =>
-                  !onSwipe ? goToDetailHome(film.mediaType, film.id) : ""
+                  !onSwipe ? goToDetailHome(film.mediaType, film.id) : ''
                 }
               />
             ))

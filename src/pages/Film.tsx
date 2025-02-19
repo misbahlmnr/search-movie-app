@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
-import Card from "../components/Card";
-import Section from "../components/Section";
-import Slider from "../components/Slider/Slider";
-import TrailerModal from "../components/Trailer-modal";
-import Images from "../components/images";
-import { Loading } from "../components/loading";
-import { getDetailData } from "../services/api/actions";
-import { StoreContext } from "../services/context";
-import { MediaType } from "../types";
-import { getThumbnailYoutube, tmdbImageSrc } from "../utils";
+import { useContext, useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router';
+import Card from '../components/Card';
+import Section from '../components/Section';
+import Slider from '../components/Slider/Slider';
+import TrailerModal from '../components/TrailerModal';
+import Images from '../components/images';
+import { Loading } from '../components/loading';
+import { getDetailData } from '../services/api/actions';
+import { StoreContext } from '../services/context';
+import { MediaType } from '../types';
+import { getThumbnailYoutube, tmdbImageSrc } from '../utils';
 
 interface Props {
   mediaType: MediaType;
@@ -47,7 +47,7 @@ const Film = (props: Props) => {
 
   return (
     <>
-      <TrailerModal onHide={() => setTrailerSrc("")} src={trailerSrc} />
+      <TrailerModal onHide={() => setTrailerSrc('')} src={trailerSrc} />
       {/* background imag */}
       <div className="h-[300px] top-0 left-0 right-0 bottom-0 relative">
         <div className="overlay-film-cover" />
