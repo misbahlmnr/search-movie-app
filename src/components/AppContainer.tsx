@@ -6,6 +6,7 @@ import Header from '@/layout/Header';
 import { getGenreData } from '@/services/api/actions';
 import { StoreContext } from '@/services/context';
 import { Loading } from './loading';
+import { ErrorBoundary } from 'react-error-boundary';
 
 const AppContainer = () => {
   const { state, dispatch } = useContext(StoreContext);
@@ -24,16 +25,18 @@ const AppContainer = () => {
   }
 
   return (
-    <Router>
-      <div className="pb-[64px] font-manrope tracking-wide">
-        {/* header */}
-        <Header />
-        {/* body */}
-        <Body />
-        {/* footer */}
-        <Footer />
-      </div>
-    </Router>
+    <ErrorBoundary fallback={<p>⚠️Something went wrong</p>}>
+      <Router>
+        <div className="pb-[64px] font-manrope tracking-wide">
+          {/* header */}
+          <Header />
+          {/* body */}
+          <Body />
+          {/* footer */}
+          <Footer />
+        </div>
+      </Router>
+    </ErrorBoundary>
   );
 };
 

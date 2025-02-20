@@ -1,7 +1,7 @@
-import { MdPlayCircleOutline } from "react-icons/md";
-import { Film } from "../interfaces";
-import { tmdbImageSrc } from "../utils";
-import Images from "./images";
+import { MdPlayCircleOutline } from 'react-icons/md';
+import { Film } from '../interfaces';
+import { tmdbImageSrc } from '../utils';
+import Images from './images';
 
 interface Props {
   film: Film;
@@ -16,17 +16,17 @@ const TrendingHero = (props: Props) => {
       className="h-[400px] relative flex items-center cursor-pointer"
     >
       {/* bg image */}
-      <div className="absolute left-0 top-0 right-0 bottom-0">
+      <div className="absolute top-0 bottom-0 left-0 right-0">
         <div className="overlay-slick-hero" />
         <Images
           src={tmdbImageSrc(props.film.coverPath, true)}
-          className="w-full h-full object-center"
+          className="object-center w-full h-full"
         />
         <div className="overlay-film-cover" />
       </div>
       {/* text */}
       <div className="flex flex-col gap-4 items-start relative z-10 mx-[55px] max-w-[50%] mobile:max-w-[100%]">
-        <p className="text-2xl line-clamp-1 font-bold">{props.film.title}</p>
+        <p className="text-2xl font-bold line-clamp-1">{props.film.title}</p>
         <p className="text-sm line-clamp-3">{props.film.description}</p>
         <button
           onClick={(e) => {

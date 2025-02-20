@@ -1,10 +1,10 @@
-import { SkeletonTheme } from "react-loading-skeleton";
-import { Route, Routes } from "react-router";
-import Catalog from "../pages/Catalog";
-import Film from "../pages/Film";
-import Home from "../pages/Home";
-import Season from "../pages/Season";
-import LazyLoadImageTesting from "../pages/TestSkeleton";
+import { SkeletonTheme } from 'react-loading-skeleton';
+import { Route, Routes } from 'react-router';
+import Catalog from '../pages/Catalog';
+import Film from '../pages/Film';
+import Home from '../pages/Home';
+import Season from '../pages/Season';
+import LazyLoadImageTesting from '../pages/TestSkeleton';
 
 const Body = () => {
   return (
