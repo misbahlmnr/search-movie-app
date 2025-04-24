@@ -40,7 +40,6 @@ export const useViewModel = (): Return => {
 
   const onWindowClick = () => {
     setIsSearchFocuss(false);
-    initKeyword();
   };
 
   useEffect(() => {

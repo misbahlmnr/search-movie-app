@@ -45,6 +45,8 @@ const SearchResult = (props: Props) => {
     getGenreData(dispatch);
   }, [keyword]);
 
+  console.log('items', items);
+
   return (
     <div
       className={cva(
@@ -62,32 +64,38 @@ const SearchResult = (props: Props) => {
         'overflow-x-auto'
       )}
     >
-      {items.map((film, idx) => (
-        <div
-          onClick={() => navigate(`/${film.mediaType}/${film.id}/`)}
-          key={idx}
-          className="flex items-start p-1.5 rounded-lg hover:bg-primary cursor-pointer m-1.5"
-        >
-          {/* images */}
-          <Images
-            src={tmdbImageSrc(film.posterPath)}
-            className="h-[72px] min-w-[102px] w-[102px]"
-          />
-          {/* title and genres */}
-          <div className="px-3 truncate">
-            <p className="text-base font-semibold truncate">{film.title}</p>
-            <ul className="flex flex-wrap gap-x-1.5 text-sm">
-              {film.genreIds.map((id, idx) => (
-                <li key={idx} className="">
-                  {dataGenres &&
-                    dataGenres[film.mediaType].find((g) => g.id === id)?.name}
-                  {idx !== film.genreIds.length - 1 ? ', ' : ''}
-                </li>
-              ))}
-            </ul>
+      {items.length > 0 ? (
+        items.map((film, idx) => (
+          <div
+            onClick={() => navigate(`/${film.mediaType}/${film.id}/`)}
+            key={idx}
+            className="flex items-start p-1.5 rounded-lg hover:bg-primary cursor-pointer m-1.5"
+          >
+            {/* images */}
+            <Images
+              src={tmdbImageSrc(film.posterPath)}
+              className="h-[72px] min-w-[102px] w-[102px]"
+            />
+            {/* title and genres */}
+            <div className="px-3 truncate">
+              <p className="text-base font-semibold truncate">{film.title}</p>
+              <ul className="flex flex-wrap gap-x-1.5 text-sm">
+                {film.genreIds.map((id, idx) => (
+                  <li key={idx} className="">
+                    {dataGenres &&
+                      dataGenres[film.mediaType].find((g) => g.id === id)?.name}
+                    {idx !== film.genreIds.length - 1 ? ', ' : ''}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
+        ))
+      ) : (
+        <div className="flex items-center justify-center h-[80px]">
+          <p className="text-center">No result found</p>
         </div>
-      ))}
+      )}
 
       {totalItem > 5 && (
         <button

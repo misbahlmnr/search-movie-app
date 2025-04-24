@@ -68,6 +68,8 @@ const Header = () => {
             'h-[40px]',
             'rounded-lg',
             'flex',
+            'flex-row-reverse',
+            'gap-2',
             'items-center',
             'justify-center',
             'p-2',
@@ -78,14 +80,17 @@ const Header = () => {
           )}
         >
           <input
-            type="text"
+            type="search"
             name="search"
             id="search"
             value={keyword}
             placeholder="Search..."
             autoComplete="off"
             className="flex-1 bg-transparent outline-0"
-            onInput={(e) => setKeyword(e.currentTarget.value)}
+            onInput={(e) => {
+              setKeyword(e.currentTarget.value);
+              setIsSearchFocuss(true);
+            }}
             onKeyDown={(e) => (e.key === 'Enter' ? goToSearchPage() : '')}
             onClick={(e) => {
               e.stopPropagation();
