@@ -1,17 +1,17 @@
-import Slick, { Settings } from "react-slick";
+import Slick, { Settings } from 'react-slick';
 // import "slick-carousel/slick/slick-theme.css";
 // import "slick-carousel/slick/slick.css";
-import { ReactNode, useState } from "react";
-import "./slider.css";
+import { ReactNode, useState } from 'react';
+import './slider.css';
 
-interface Props extends Omit<Settings, "children"> {
+interface Props extends Omit<Settings, 'children'> {
   isMovieCard?: boolean;
   isSeasonCard?: boolean;
   children?: (onSwipe: boolean) => ReactNode;
 }
 
 const Slider = (props: Props) => {
-  let settings: Omit<Settings, "children"> = {
+  let settings: Omit<Settings, 'children'> = {
     ...props,
   };
 
@@ -48,11 +48,11 @@ const Slider = (props: Props) => {
     <Slick
       {...settings}
       autoplaySpeed={5000}
-      onSwipe={() => setOnSwipe(true)}
+      swipeEvent={() => setOnSwipe(true)}
       afterChange={() => setOnSwipe(false)}
       adaptiveHeight
     >
-      {props.children ? props.children(onSwipe) : ""}
+      {props.children ? props.children(onSwipe) : ''}
     </Slick>
   );
 };

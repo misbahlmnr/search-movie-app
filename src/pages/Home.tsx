@@ -37,8 +37,9 @@ const Home = () => {
           slidesToShow={1}
           slidesToScroll={1}
         >
-          {(onSwipe) =>
-            trendings.map((film, idx) => (
+          {(onSwipe) => {
+            console.log('onSwipe', onSwipe);
+            return trendings.map((film, idx) => (
               <TrendingHero
                 key={idx}
                 film={film}
@@ -46,11 +47,11 @@ const Home = () => {
                 onClick={() =>
                   !onSwipe
                     ? goToDetailHome(navigate, film.mediaType, film.id)
-                    : ''
+                    : null
                 }
               />
-            ))
-          }
+            ));
+          }}
         </Slider>
       </Section>
 
