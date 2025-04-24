@@ -9,7 +9,11 @@
     /* Alias Path */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@services/*": ["./src/services/*"],
+      "@pages/*": ["./src/pages/*"]
     },
 
     /* Bundler mode */

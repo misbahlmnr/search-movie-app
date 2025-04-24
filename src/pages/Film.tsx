@@ -1,30 +1,34 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
-import Card from '../components/Card';
-import Section from '../components/Section';
-import Slider from '../components/Slider/Slider';
-import TrailerModal from '../components/TrailerModal';
-import Images from '../components/images';
-import { Loading } from '../components/loading';
-import { getDetailData } from '../services/api/actions';
-import { StoreContext } from '../services/context';
+import Card from '@components/Card';
+import Section from '@components/Section';
+import Slider from '@components/Slider/Slider';
+import TrailerModal from '@components/TrailerModal';
+import Images from '@components/images';
+import { Loading } from '@components/loading';
 import { MediaType } from '../types';
 import { getThumbnailYoutube, tmdbImageSrc } from '../utils';
+import useGetDetailData from '@hooks/useGetDetailData';
+import useGetGenresData from '@/hooks/useGetGenresData';
 
 interface Props {
   mediaType: MediaType;
 }
 
 const Film = (props: Props) => {
-  const { state, dispatch } = useContext(StoreContext);
-  const {
-    detailFilm: { detail, casts, trailers, recomendations },
-    genres,
-  } = state;
   const { id } = useParams();
+
   const navigate = useNavigate();
   const location = useLocation();
+
   const [trailerSrc, setTrailerSrc] = useState<null | string>(null);
+
+  const { data: dataGenres } = useGetGenresData();
+  const { data, isLoading } = useGetDetailData(
+    parseInt(id as string),
+    props.mediaType
+  );
+  const { detail, casts, trailers, recommendations } = data;
 
   const playTrailer = async (key: string) => {
     setTrailerSrc(`https://www.youtube.com/embed/${key}?autoplay=0`);
@@ -34,10 +38,9 @@ const Film = (props: Props) => {
     window.scrollTo({
       top: 0,
     });
-    getDetailData(props.mediaType, parseInt(id as string), dispatch);
   }, [location]);
 
-  if (!detail) {
+  if (!detail || isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
         <Loading />
@@ -64,15 +67,16 @@ const Film = (props: Props) => {
           className="w-[200px] min-w-[200px] h-[300px] rounded-lg overflow-hidden mobile:mx-auto"
         />
 
-        <div className="px-3 pt-5 flex flex-col items-start gap-4">
+        <div className="flex flex-col items-start gap-4 px-3 pt-5">
           <p className="text-xl line-clamp-1">{detail.title}</p>
-          <ul className="flex items-center gap-3 flex-wrap">
+          <ul className="flex flex-wrap items-center gap-3">
             {detail.genreIds.map((id, idx) => (
               <li
                 key={idx}
                 className="px-3 py-1.5 bg-red-800 rounded-lg text-sm"
               >
-                {genres[detail.mediaType].find((g) => g.id === id)?.name}
+                {dataGenres &&
+                  dataGenres[detail.mediaType].find((g) => g.id === id)?.name}
               </li>
             ))}
           </ul>
@@ -83,7 +87,7 @@ const Film = (props: Props) => {
       {/* cast */}
       {casts && (
         <Section title="Cast">
-          <div className="scrollbar scrollbar-thumb-primary scrollbar-track-header overflow-x-auto">
+          <div className="overflow-x-auto scrollbar scrollbar-thumb-primary scrollbar-track-header">
             <div className="flex items-center gap-3">
               {casts.map((item, idx) => (
                 <div className="flex-shrink-0 w-[200px] my-3" key={idx}>
@@ -104,9 +108,9 @@ const Film = (props: Props) => {
       )}
 
       {/* trailers */}
-      {trailers.length > 0 && (
+      {trailers && trailers.length > 0 && (
         <Section title="Trailers">
-          <div className="scrollbar scrollbar-thumb-primary scrollbar-track-header overflow-x-auto">
+          <div className="overflow-x-auto scrollbar scrollbar-thumb-primary scrollbar-track-header">
             <div className="flex items-center gap-3">
               {trailers.map((item, idx) => (
                 <Card
@@ -145,7 +149,7 @@ const Film = (props: Props) => {
       )}
 
       {/* recomendations */}
-      {recomendations.length > 0 && (
+      {recommendations && recommendations.length > 0 && (
         <Section title="Recomendation" className="py-0">
           <Slider
             isMovieCard
@@ -157,7 +161,7 @@ const Film = (props: Props) => {
             {
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
               (_) =>
-                recomendations.map((recomendation, idx) => (
+                recommendations.map((recomendation, idx) => (
                   <Card
                     onClick={() =>
                       navigate(

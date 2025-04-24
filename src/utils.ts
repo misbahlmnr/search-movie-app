@@ -1,11 +1,13 @@
-import { Film, Season } from "./interfaces";
-import { MediaType } from "./types";
+import { useNavigate } from 'react-router';
+import { Film, Season } from './interfaces';
+import { getTrailers } from './services/api/api';
+import { MediaType } from './types';
 
 export const mergeClassName = (val1: string, val2?: string) => {
-  return val1 + " " + (val2 || "");
+  return val1 + ' ' + (val2 || '');
 };
 
-export const cva = (...args: string[]) => args.join(" ");
+export const cva = (...args: string[]) => args.join(' ');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const formatResult = (obj: any, mediaType?: MediaType): Film => {
@@ -42,7 +44,7 @@ export const isFilm = (film: any): film is Film => {
 
 export const tmdbImageSrc = (path: string, isHd = false) => {
   const baseImageURI = import.meta.env.VITE_REACT_APP_TMDB_API_IMAGE_URL;
-  const quality = isHd ? "original" : "w500";
+  const quality = isHd ? 'original' : 'w500';
   if (path) {
     return baseImageURI + quality + path;
   }
@@ -78,6 +80,16 @@ export const getThumbnailYoutube = (key: string) => {
 export const formatDate = (date: string) => {
   const nowDate = new Date(date);
   return (
-    nowDate.getDate() + "/" + nowDate.getMonth() + "/" + nowDate.getFullYear()
+    nowDate.getDate() + '/' + nowDate.getMonth() + '/' + nowDate.getFullYear()
   );
+};
+
+export const playTrailer = async (film: Film) => {};
+
+export const goToDetailHome = (
+  navigate: any,
+  mediaType: MediaType,
+  id: number
+): void => {
+  navigate(`/${mediaType}/${id}`);
 };

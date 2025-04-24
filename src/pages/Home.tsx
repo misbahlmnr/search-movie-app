@@ -1,21 +1,21 @@
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import Card from '../components/Card';
-import Section from '../components/Section';
-import Slider from '../components/Slider/Slider';
-import TrailerModal from '../components/TrailerModal';
-import TrendingHero from '../components/TrendingHero';
+import Card from '@components/Card';
+import Section from '@components/Section';
+import Slider from '@components/Slider/Slider';
+import TrailerModal from '@components/TrailerModal';
+import TrendingHero from '@components/TrendingHero';
 import { Film } from '../interfaces';
-import { getHomeData } from '../services/api/actions';
-import { getTrailers } from '../services/api/api';
-import { StoreContext } from '../services/context';
-import { MediaType } from '../types';
-import { tmdbImageSrc } from '../utils';
+import { getTrailers } from '@/services/api/api';
+import { goToDetailHome, tmdbImageSrc } from '../utils';
+import useGetHomeData from '@/hooks/useGetHomeData';
 
 const Home = () => {
-  const { state, dispatch } = useContext(StoreContext);
-  const { trendings, populars, theaters, topRated } = state;
   const [trailerSrc, setTrailerSrc] = useState<null | string>(null);
+
+  const { isLoading, data } = useGetHomeData();
+  const { trendings, populars, theaters, topRatedMovies, topRatedTVShow } =
+    data;
 
   const navigate = useNavigate();
 
@@ -25,13 +25,6 @@ const Home = () => {
       `https://www.youtube.com/embed/${trailers[0].key}?autoplay=0`
     );
   };
-
-  const goToDetailHome = (mediaType: MediaType, id: number) =>
-    navigate(`/${mediaType}/${id}`);
-
-  useEffect(() => {
-    getHomeData(dispatch);
-  }, []);
 
   return (
     <>
@@ -51,7 +44,9 @@ const Home = () => {
                 film={film}
                 onPlayTrailer={() => playTrailer(film)}
                 onClick={() =>
-                  !onSwipe ? goToDetailHome(film.mediaType, film.id) : ''
+                  !onSwipe
+                    ? goToDetailHome(navigate, film.mediaType, film.id)
+                    : ''
                 }
               />
             ))
@@ -71,9 +66,12 @@ const Home = () => {
           {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             (_) =>
+              theaters &&
               theaters.map((film, idx) => (
                 <Card
-                  onClick={() => goToDetailHome(film.mediaType, film.id)}
+                  onClick={() =>
+                    goToDetailHome(navigate, film.mediaType, film.id)
+                  }
                   key={idx}
                   title={film.title}
                   imageSrc={tmdbImageSrc(film.posterPath)}
@@ -97,7 +95,9 @@ const Home = () => {
             (_) =>
               populars.map((film, idx) => (
                 <Card
-                  onClick={() => goToDetailHome(film.mediaType, film.id)}
+                  onClick={() =>
+                    goToDetailHome(navigate, film.mediaType, film.id)
+                  }
                   key={idx}
                   title={film.title}
                   imageSrc={tmdbImageSrc(film.posterPath)}
@@ -123,9 +123,12 @@ const Home = () => {
           {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             (_) =>
-              topRated.topRatedTV.map((film, idx) => (
+              topRatedMovies &&
+              topRatedMovies.map((film, idx) => (
                 <Card
-                  onClick={() => goToDetailHome(film.mediaType, film.id)}
+                  onClick={() =>
+                    goToDetailHome(navigate, film.mediaType, film.id)
+                  }
                   key={idx}
                   title={film.title}
                   imageSrc={tmdbImageSrc(film.posterPath)}
@@ -151,9 +154,12 @@ const Home = () => {
           {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             (_) =>
-              topRated.topRatedMovies.map((film, idx) => (
+              topRatedTVShow &&
+              topRatedTVShow.map((film, idx) => (
                 <Card
-                  onClick={() => goToDetailHome(film.mediaType, film.id)}
+                  onClick={() =>
+                    goToDetailHome(navigate, film.mediaType, film.id)
+                  }
                   key={idx}
                   title={film.title}
                   imageSrc={tmdbImageSrc(film.posterPath)}

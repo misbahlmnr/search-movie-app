@@ -1,32 +1,29 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import Section from "../components/Section";
-import Images from "../components/images";
-import { Loading } from "../components/loading";
-import { Season as SeasonInterface } from "../interfaces";
-import { getEpisodes } from "../services/api/api";
-import { formatDate, tmdbImageSrc } from "../utils";
+import { useLocation, useParams } from 'react-router';
+import Section from '../components/Section';
+import Images from '../components/images';
+import { Loading } from '../components/loading';
+import { formatDate, tmdbImageSrc } from '../utils';
+import useGetSeasonData from '@/hooks/useGetSeasonData';
+import { useEffect } from 'react';
 
 const Season = () => {
   const { id, seasonNumber } = useParams();
-  const [season, setSeason] = useState<null | SeasonInterface>(null);
+  const location = useLocation();
 
-  const fetch = async () => {
-    setSeason(
-      await getEpisodes(
-        parseInt(id as string),
-        parseInt(seasonNumber as string)
-      )
-    );
-  };
+  const { data, isLoading } = useGetSeasonData(
+    parseInt(id as string),
+    parseInt(seasonNumber as string)
+  );
 
   useEffect(() => {
-    fetch();
-  }, []);
+    window.scrollTo({
+      top: 0,
+    });
+  }, [location]);
 
-  if (!season) {
+  if (!data || isLoading) {
     return (
-      <div className="fixed left-0 right-0 bottom-0 top-0 flex items-center justify-center">
+      <div className="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center">
         <Loading />
       </div>
     );
@@ -38,7 +35,7 @@ const Season = () => {
       <div className="h-[150px] top-0 left-0 right-0 bottom-0 relative">
         <div className="overlay-film-cover" />
         <Images
-          src={tmdbImageSrc(season.posterPath, true)}
+          src={tmdbImageSrc(data.posterPath, true)}
           className="w-full h-full"
         />
       </div>
@@ -46,35 +43,35 @@ const Season = () => {
       {/* poster and detail */}
       <Section className="-mt-[75px] flex items-center relative z-10 mobile:block">
         <Images
-          src={tmdbImageSrc(season.posterPath)}
+          src={tmdbImageSrc(data.posterPath)}
           className="w-[150px] min-w-[150px] min-h-[200px] h-[200px] mobile:mx-auto"
         />
 
-        <div className="px-3 flex flex-col items-start gap-4">
-          <p className="text-xl line-clamp-1">{season.title}</p>
+        <div className="flex flex-col items-start gap-4 px-3">
+          <p className="text-xl line-clamp-1">{data.title}</p>
           <p className="opacity-[0.9]">
-            <b>{season.name}</b> &#8226; {season.episodes.length} Episode
+            <b>{data.name}</b> &#8226; {data.episodes.length} Episode
           </p>
         </div>
       </Section>
 
       {/* Episode */}
       <Section title="Episode">
-        {season.episodes.map((episode, idx) => (
+        {data.episodes.map((episode, idx) => (
           <div
             key={idx}
-            className="my-6 flex items-stretch gap-3 rounded-md cursor-pointer"
+            className="flex items-stretch gap-3 my-6 rounded-md cursor-pointer"
           >
             <Images
               src={tmdbImageSrc(episode.stillPath)}
               className="min-w-[300px] w-[300px] h-[150px]"
             />
-            <div className="overflow-hidden flex flex-col gap-3 w-full">
+            <div className="flex flex-col w-full gap-3 overflow-hidden">
               <p className="text-lg truncate">
                 {episode.episodeNumber}. {episode.title}
               </p>
               <p className="opacity-[0.9] line-clamp-5">{episode.overview}</p>
-              <div className="mt-auto pt-3 text-right">
+              <div className="pt-3 mt-auto text-right">
                 {formatDate(episode.airDate)}
               </div>
             </div>

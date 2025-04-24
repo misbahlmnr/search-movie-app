@@ -1,31 +1,33 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router";
-import { useDebounce } from "use-debounce";
-import { Film } from "../interfaces";
-import { getGenreData } from "../services/api/actions";
-import { Search } from "../services/api/api";
-import { StoreContext } from "../services/context";
-import { cva, tmdbImageSrc } from "../utils";
-import Images from "./images";
+import { useContext, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { useDebounce } from 'use-debounce';
+import { Film } from '../interfaces';
+import { getGenreData } from '@services/api/actions';
+import { Search } from '@services/api/api';
+import { StoreContext } from '@services/context';
+import { cva, tmdbImageSrc } from '../utils';
+import Images from './images';
+import useGetGenresData from '@/hooks/useGetGenresData';
 
 interface Props {
   keyword: string;
-  // eslint-disable-next-line @typescript-eslint/ban-types
   goToSearchPage: Function;
 }
 
 const SearchResult = (props: Props) => {
-  const { state, dispatch } = useContext(StoreContext);
-  const { genres } = state;
+  const { dispatch } = useContext(StoreContext);
+
   const navigate = useNavigate();
   const [items, setItems] = useState<Film[]>([]);
 
   const [totalItem, setTotalItem] = useState(0);
 
+  const { data: dataGenres } = useGetGenresData();
+
   const [keyword] = useDebounce(props.keyword, 1500);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const setTimeOutRef = useRef<any>("");
+  const setTimeOutRef = useRef<any>('');
 
   const Fetch = async () => {
     if (!keyword) return;
@@ -46,18 +48,18 @@ const SearchResult = (props: Props) => {
   return (
     <div
       className={cva(
-        "absolute",
-        "top-[48px]",
-        "left-0",
-        "right-0",
-        "rounded-md",
-        "bg-header",
-        "max-h-[450px]",
-        "shadow-lg",
-        "scrollbar",
-        "scrollbar-thumb-primary",
-        "scrollbar-track-header",
-        "overflow-x-auto"
+        'absolute',
+        'top-[48px]',
+        'left-0',
+        'right-0',
+        'rounded-md',
+        'bg-header',
+        'max-h-[450px]',
+        'shadow-lg',
+        'scrollbar',
+        'scrollbar-thumb-primary',
+        'scrollbar-track-header',
+        'overflow-x-auto'
       )}
     >
       {items.map((film, idx) => (
@@ -73,12 +75,13 @@ const SearchResult = (props: Props) => {
           />
           {/* title and genres */}
           <div className="px-3 truncate">
-            <p className="text-base truncate font-semibold">{film.title}</p>
+            <p className="text-base font-semibold truncate">{film.title}</p>
             <ul className="flex flex-wrap gap-x-1.5 text-sm">
               {film.genreIds.map((id, idx) => (
                 <li key={idx} className="">
-                  {genres[film.mediaType].find((g) => g.id === id)?.name}
-                  {idx !== film.genreIds.length - 1 ? ", " : ""}
+                  {dataGenres &&
+                    dataGenres[film.mediaType].find((g) => g.id === id)?.name}
+                  {idx !== film.genreIds.length - 1 ? ', ' : ''}
                 </li>
               ))}
             </ul>

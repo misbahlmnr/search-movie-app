@@ -1,40 +1,53 @@
-import { useContext, useEffect } from 'react';
+import { Suspense, useContext, useEffect, useRef } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Body from '@/layout/Body';
 import Footer from '@/layout/Footer';
 import Header from '@/layout/Header';
-import { getGenreData } from '@/services/api/actions';
 import { StoreContext } from '@/services/context';
-import { Loading } from './loading';
 import { ErrorBoundary } from 'react-error-boundary';
+import LoadingBar, { LoadingBarRef } from 'react-top-loading-bar';
+import useGetGenresData from '@/hooks/useGetGenresData';
 
 const AppContainer = () => {
   const { state, dispatch } = useContext(StoreContext);
-  const { genres } = state;
+  const { isLoading } = state;
+
+  const { data, isLoading: isLoadingGenre } = useGetGenresData();
+
+  const loadingBarRef = useRef<LoadingBarRef>(null);
 
   useEffect(() => {
-    getGenreData(dispatch);
-  }, []);
+    dispatch({
+      type: 'FETCH_GENRES_DATA',
+      data: {
+        isLoading: isLoadingGenre,
+        ...data,
+      },
+    });
+  }, [data, isLoadingGenre]);
 
-  if (!genres.movie.length || !genres.tv.length) {
-    return (
-      <div className="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center">
-        <Loading />
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (isLoading) {
+      loadingBarRef.current?.start();
+    } else {
+      loadingBarRef.current?.complete();
+    }
+  }, [isLoading]);
 
   return (
-    <ErrorBoundary fallback={<p>⚠️Something went wrong</p>}>
+    <ErrorBoundary fallback={<p>Something went wrong</p>}>
+      <LoadingBar color="#FF0000" ref={loadingBarRef} />
       <Router>
-        <div className="pb-[64px] font-manrope tracking-wide">
-          {/* header */}
-          <Header />
-          {/* body */}
-          <Body />
-          {/* footer */}
-          <Footer />
-        </div>
+        <Suspense fallback={<LoadingBar color="#FF0000" />}>
+          <div className="pb-[64px] font-manrope tracking-wide">
+            {/* header */}
+            <Header />
+            {/* body */}
+            <Body />
+            {/* footer */}
+            <Footer />
+          </div>
+        </Suspense>
       </Router>
     </ErrorBoundary>
   );

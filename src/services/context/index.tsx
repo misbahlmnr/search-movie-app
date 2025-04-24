@@ -1,25 +1,8 @@
-import { createContext, ReactNode, useReducer } from "react";
-import { Action, State } from "./types";
+import { createContext, ReactNode, useReducer } from 'react';
+import { Action, State } from './types';
 
 const initialState: State = {
-  theaters: [],
-  trendings: [],
-  populars: [],
-  topRated: {
-    topRatedMovies: [],
-    topRatedTV: [],
-  },
-  detailFilm: {
-    detail: null,
-    casts: [],
-    trailers: [],
-    recomendations: [],
-  },
-  genres: {
-    tv: [],
-    movie: [],
-  },
-  loading: true,
+  isLoading: false,
 };
 
 type StoreContextType = {
@@ -34,40 +17,10 @@ const StoreContext = createContext<StoreContextType>({
 
 const reducer = (state = initialState, action: Action): State => {
   switch (action.type) {
-    case "FETCH_HOME_DATA":
+    case 'STATUS_LOADING':
       return {
         ...state,
-        theaters: action.data.theaters,
-        trendings: action.data.trendings,
-        populars: action.data.populars,
-        topRated: {
-          ...state.topRated,
-          topRatedMovies: action.data.topRatedMovies,
-          topRatedTV: action.data.topRatedTVShow,
-        },
-      };
-    case "FETCH_GENRES_DATA":
-      return {
-        ...state,
-        genres: {
-          tv: action.data.tv,
-          movie: action.data.movie,
-        },
-      };
-    case "FETCH_SEARCH_DATA":
-      return {
-        ...state,
-      };
-    case "FETCH_DETAIL_DATA":
-      return {
-        ...state,
-        detailFilm: {
-          ...state.detailFilm,
-          detail: action.data.detail,
-          casts: action.data.casts,
-          trailers: action.data.trailers,
-          recomendations: action.data.recommendations,
-        },
+        isLoading: action.data.isLoading,
       };
     default:
       return state;
