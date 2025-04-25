@@ -8,7 +8,7 @@ import {
 import Card from '@components/Card';
 import Section from '@components/Section';
 import { Film } from '../interfaces';
-import { Search, discover, getTopRated } from '@services/api/api';
+import { Search, discover, getTopRated } from '@/services/api';
 import { MediaType } from '../types';
 import { tmdbImageSrc } from '../utils';
 

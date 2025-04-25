@@ -1,5 +1,5 @@
-import { getGenre } from '@/services/api/api';
-import { queryKeys } from '@/services/query/queryKeys';
+import { getGenre } from '@/services/api';
+import { queryKeys } from '@/constant/queryKeys';
 import { useQuery } from '@tanstack/react-query';
 
 const useGetGenresData = () => {

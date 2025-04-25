@@ -4,8 +4,8 @@ import {
   getPopuler,
   getTopRated,
   getTrending,
-} from '@/services/api/api';
-import { queryKeys } from '@/services/query/queryKeys';
+} from '@/services/api';
+import { queryKeys } from '@/constant/queryKeys';
 import { mergeFilm } from '@/utils';
 import { useQuery } from '@tanstack/react-query';
 

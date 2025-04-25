@@ -6,14 +6,14 @@ import Slider from '@components/Slider/Slider';
 import TrailerModal from '@components/TrailerModal';
 import TrendingHero from '@components/TrendingHero';
 import { Film } from '../interfaces';
-import { getTrailers } from '@/services/api/api';
+import { getTrailers } from '@/services/api';
 import { goToDetailHome, tmdbImageSrc } from '../utils';
 import useGetHomeData from '@/hooks/useGetHomeData';
 
 const Home = () => {
   const [trailerSrc, setTrailerSrc] = useState<null | string>(null);
 
-  const { isLoading, data } = useGetHomeData();
+  const { data } = useGetHomeData();
   const { trendings, populars, theaters, topRatedMovies, topRatedTVShow } =
     data;
 
@@ -37,9 +37,8 @@ const Home = () => {
           slidesToShow={1}
           slidesToScroll={1}
         >
-          {(onSwipe) => {
-            console.log('onSwipe', onSwipe);
-            return trendings.map((film, idx) => (
+          {(onSwipe) =>
+            trendings.map((film, idx) => (
               <TrendingHero
                 key={idx}
                 film={film}
@@ -50,8 +49,8 @@ const Home = () => {
                     : null
                 }
               />
-            ));
-          }}
+            ))
+          }
         </Slider>
       </Section>
 

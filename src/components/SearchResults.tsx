@@ -1,10 +1,8 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDebounce } from 'use-debounce';
 import { Film } from '../interfaces';
-import { getGenreData } from '@services/api/actions';
-import { Search } from '@services/api/api';
-import { StoreContext } from '@services/context';
+import { Search } from '@/services/api';
 import { cva, tmdbImageSrc } from '../utils';
 import Images from './images';
 import useGetGenresData from '@/hooks/useGetGenresData';
@@ -15,8 +13,6 @@ interface Props {
 }
 
 const SearchResult = (props: Props) => {
-  const { dispatch } = useContext(StoreContext);
-
   const navigate = useNavigate();
   const [items, setItems] = useState<Film[]>([]);
 
@@ -42,7 +38,6 @@ const SearchResult = (props: Props) => {
 
   useEffect(() => {
     Fetch();
-    getGenreData(dispatch);
   }, [keyword]);
 
   console.log('items', items);

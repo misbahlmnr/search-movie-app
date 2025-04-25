@@ -1,5 +1,5 @@
-import { getEpisodes } from '@/services/api/api';
-import { queryKeys } from '@/services/query/queryKeys';
+import { getEpisodes } from '@/services/api';
+import { queryKeys } from '@/constant/queryKeys';
 import { useQuery } from '@tanstack/react-query';
 
 const useGetSeasonData = (id: number, seasonNumber: number) => {

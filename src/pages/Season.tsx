@@ -57,26 +57,32 @@ const Season = () => {
 
       {/* Episode */}
       <Section title="Episode">
-        {data.episodes.map((episode, idx) => (
-          <div
-            key={idx}
-            className="flex items-stretch gap-3 my-6 rounded-md cursor-pointer"
-          >
-            <Images
-              src={tmdbImageSrc(episode.stillPath)}
-              className="min-w-[300px] w-[300px] h-[150px]"
-            />
-            <div className="flex flex-col w-full gap-3 overflow-hidden">
-              <p className="text-lg truncate">
-                {episode.episodeNumber}. {episode.title}
-              </p>
-              <p className="opacity-[0.9] line-clamp-5">{episode.overview}</p>
-              <div className="pt-3 mt-auto text-right">
-                {formatDate(episode.airDate)}
+        {data.episodes.length > 0 ? (
+          data.episodes.map((episode, idx) => (
+            <div
+              key={idx}
+              className="flex items-stretch gap-3 my-6 rounded-md cursor-pointer"
+            >
+              <Images
+                src={tmdbImageSrc(episode.stillPath)}
+                className="min-w-[300px] w-[300px] h-[150px]"
+              />
+              <div className="flex flex-col w-full gap-3 overflow-hidden">
+                <p className="text-lg truncate">
+                  {episode.episodeNumber}. {episode.title}
+                </p>
+                <p className="opacity-[0.9] line-clamp-5">{episode.overview}</p>
+                <div className="pt-3 mt-auto text-right">
+                  {formatDate(episode.airDate)}
+                </div>
               </div>
             </div>
+          ))
+        ) : (
+          <div className="flex items-center justify-center h-[80px]">
+            <p className="text-center">No episode found</p>
           </div>
-        ))}
+        )}
       </Section>
     </>
   );

@@ -33,7 +33,7 @@ const TrendingHero = (props: Props) => {
             e.stopPropagation();
             props.onPlayTrailer();
           }}
-          className="px-3 py-1.5 flex items-center gap-3 bg-red-800 rounded-md"
+          className="px-3 py-1.5 flex items-center gap-3 bg-red-800 rounded-md hover:cursor-pointer"
         >
           <MdPlayCircleOutline size={18} />
           <span>Play Trailer</span>
