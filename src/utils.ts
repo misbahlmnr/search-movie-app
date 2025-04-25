@@ -1,6 +1,4 @@
-import { useNavigate } from 'react-router';
 import { Film, Season } from './interfaces';
-import { getTrailers } from './services/api';
 import { MediaType } from './types';
 
 export const mergeClassName = (val1: string, val2?: string) => {
@@ -83,8 +81,6 @@ export const formatDate = (date: string) => {
     nowDate.getDate() + '/' + nowDate.getMonth() + '/' + nowDate.getFullYear()
   );
 };
-
-export const playTrailer = async (film: Film) => {};
 
 export const goToDetailHome = (
   navigate: any,
