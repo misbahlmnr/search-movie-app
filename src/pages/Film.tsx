@@ -62,7 +62,7 @@ const Film = (props: Props) => {
     <>
       <TrailerModal onHide={() => setTrailerSrc('')} src={trailerSrc} />
       {/* background imag */}
-      <div className="h-[300px] top-0 left-0 right-0 bottom-0 relative">
+      <div className="h-[300px] top-0 left-0 right-0 bottom-0 relative overflow-hidden">
         <div className="overlay-film-cover" />
         <Images
           src={tmdbImageSrc(detail.coverPath, true)}
