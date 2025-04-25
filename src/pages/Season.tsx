@@ -21,6 +21,16 @@ const Season = () => {
     });
   }, [location]);
 
+  useEffect(() => {
+    if (data) {
+      document.title = `Season ${data.name} - Search Movie`;
+    }
+
+    return () => {
+      document.title = 'Search Movie - Cari Film Terbaik Versimu';
+    };
+  }, [data]);
+
   if (!data || isLoading) {
     return (
       <div className="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center">

@@ -92,6 +92,20 @@ const Catalog = (props: Props) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (props.type === 'search') {
+      document.title = `Search ${params.get('q')} - Search Movie`;
+    } else if (props.type === 'list') {
+      document.title = `List ${title} - Search Movie`;
+    } else {
+      document.title = `Catalog ${props.type} - Search Movie`;
+    }
+
+    return () => {
+      document.title = 'Search Movie - Cari Film Terbaik Versimu';
+    };
+  }, [props.type]);
+
   return (
     <>
       {/* background imag */}
@@ -103,15 +117,19 @@ const Catalog = (props: Props) => {
       <Section title={title} className="relative z-10 flex items-center" />
       <Section>
         <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 mobile:grid-cols-2">
-          {film.map((film, idx) => (
-            <div key={idx}>
-              <Card
-                onClick={() => navigate(`/${film.mediaType}/${film.id}`)}
-                imageSrc={tmdbImageSrc(film.posterPath)}
-                title={film.title}
-              />
-            </div>
-          ))}
+          {film.length > 0 ? (
+            film.map((film, idx) => (
+              <div key={idx}>
+                <Card
+                  onClick={() => navigate(`/${film.mediaType}/${film.id}`)}
+                  imageSrc={tmdbImageSrc(film.posterPath)}
+                  title={film.title}
+                />
+              </div>
+            ))
+          ) : (
+            <p className="text-center col-span-full">No result found</p>
+          )}
         </div>
       </Section>
     </>

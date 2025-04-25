@@ -40,6 +40,16 @@ const Film = (props: Props) => {
     });
   }, [location]);
 
+  useEffect(() => {
+    if (detail) {
+      document.title = `Detail ${detail.title} - Search Movie`;
+    }
+
+    return () => {
+      document.title = 'Search Movie - Cari Film Terbaik Versimu';
+    };
+  }, [detail]);
+
   if (!detail || isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">

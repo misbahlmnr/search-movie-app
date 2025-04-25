@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Card from '@components/Card';
 import Section from '@components/Section';
@@ -25,6 +25,14 @@ const Home = () => {
       `https://www.youtube.com/embed/${trailers[0].key}?autoplay=0`
     );
   };
+
+  useEffect(() => {
+    document.title = `Beranda - Search Movie`;
+
+    return () => {
+      document.title = 'Search Movie - Cari Film Terbaik Versimu';
+    };
+  }, []);
 
   return (
     <>
