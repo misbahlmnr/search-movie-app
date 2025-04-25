@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from "axios";
-import { Cast, Episode, Film, Genre, Season, Trailer } from "../../interfaces";
-import { MediaType } from "../../types";
-import { formatResult } from "../../utils";
+import axios, { AxiosResponse } from 'axios';
+import { Cast, Episode, Film, Genre, Season, Trailer } from '../../interfaces';
+import { MediaType } from '../../types';
+import { formatResult } from '../../utils';
 
 const axiosClient = axios.create({
   /* 
@@ -47,7 +47,7 @@ export const getInTheaters = async (): Promise<Film[]> => {
       AxiosResponse<{ results: unknown[] }>
     >(`/movie/now_playing`);
 
-    return data.results.map((val) => formatResult(val, "movie"));
+    return data.results.map((val) => formatResult(val, 'movie'));
   } catch (err) {
     console.error(err);
   }
@@ -133,8 +133,6 @@ export const Search = async (
         page,
       },
     });
-
-    console.log(data);
 
     return {
       totalPages: data.total_pages,
@@ -260,12 +258,12 @@ export const getEpisodes = async (
       `/tv/${tvId}/season/${seasonNumber}`
     );
 
-    const film = await getDetail("tv", tvId);
+    const film = await getDetail('tv', tvId);
 
     return {
       id: data.id,
       name: data.name,
-      title: film?.title || "",
+      title: film?.title || '',
       seasonNumber: data.season_number,
       posterPath: data.poster_path,
       episodes: data.episodes.map(
