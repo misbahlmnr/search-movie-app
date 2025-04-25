@@ -25,7 +25,7 @@ const AppContainer = () => {
     <ErrorBoundary fallback={<GlobalErrorFallback />}>
       <LoadingBar color="#FF0000" ref={loadingBarRef} />
       <Suspense fallback={<LoadingBar color="#FF0000" />}>
-        <div className="pb-[64px] font-manrope tracking-wide">
+        <div className="pb-[64px] min-h-screen h-full flex flex-col font-manrope tracking-wide">
           {/* header */}
           <Header />
           {/* body */}
