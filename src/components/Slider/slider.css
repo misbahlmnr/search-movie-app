@@ -1,5 +1,5 @@
-@import "slick-carousel/slick/slick.css";
-@import "slick-carousel/slick/slick-theme.css";
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
 
 .slick-list {
   height: 100%;
@@ -19,31 +19,40 @@
   right: 0;
 }
 
-.slick-hero .slick-prev {
-  display: none !important;
+.slick-next,
+.slick-next:hover,
+.slick-prev,
+.slick-prev:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  width: 40px;
+  height: 50px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border: 1px solid white;
 }
 
-.slick-hero .slick-next {
-  display: none !important;
-}
-
-.slick-slider .slick-prev {
-  left: -30px;
-}
-
-.slick-slider .slick-prev::before {
-  z-index: 10;
-  font-size: 50px;
+.slick-next:hover svg {
+  fill: #9f0712 !important;
 }
 
 .slick-slider .slick-next::before {
-  z-index: 10;
-  font-size: 50px;
+  display: none;
+}
+
+.slick-slider .slick-prev::before {
+  display: none;
 }
 
 .custom-slider.slick-slider {
   max-height: 320px;
   height: 320px;
+}
+
+.slick-hero .slick-prev,
+.slick-hero .slick-next {
+  display: none !important;
 }
 
 @media screen and (max-width: 768px) {
